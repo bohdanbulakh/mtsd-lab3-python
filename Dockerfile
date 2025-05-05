@@ -1,8 +1,8 @@
-FROM python:3.12-bullseye AS base
+FROM python:3.12-alpine AS base
 
 RUN python -m venv .venv
 
-FROM python:3.12-bullseye AS dependencies
+FROM python:3.12-alpine AS dependencies
 
 ENV PATH="/.venv/bin:$PATH"
 
@@ -11,7 +11,7 @@ COPY requirements requirements
 
 RUN pip install -r requirements/backend.in
 
-FROM python:3.12-bullseye AS app
+FROM python:3.12-alpine AS app
 
 COPY --from=dependencies .venv .venv
 
